@@ -1,0 +1,3 @@
+# cesdexercises
+
+Open `index.html` :)
