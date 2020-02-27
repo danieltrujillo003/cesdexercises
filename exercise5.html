@@ -23,9 +23,9 @@
   <br /><br />
   <span id="display3" class="resultado"></span>
 
-  
+
   <script>
-    
+
     const getSequencyOfNumbers = (begin, step, end) => {
       let sequency = []
       for (let i = begin; i <= end; i += step) {
@@ -39,16 +39,16 @@
         setTimeout(() => {
           let numberToInsert = index + 1 === sequency.length ? `${number}` : `${number}, `
           document.getElementById(containerId).innerHTML += numberToInsert
-          }, delay + 50 * (index + 1))        
+          }, delay + 50 * (index + 1))
       });
     }
 
-    const showFactorial = () => {
+    const showFactorial = (top) => {
       let factorial = 1
-      for (let i = 1; i <= 100; i++) {
+      for (let i = 1; i <= top; i++) {
         setTimeout(() => {
-        factorial *= i        
-        document.getElementById(`display3`).innerHTML = factorial
+        factorial *= i
+        document.getElementById(`display3`).innerHTML = factorial.toLocaleString('fullwide', {useGrouping:false})
         }, 25*i)
       }
     }
@@ -58,14 +58,14 @@
       document.getElementById(`display2`).innerHTML = null
     }
 
-    const clicked = () => {
+    const clicked = (top) => {
       clear()
-      showSequency(getSequencyOfNumbers(0,2,100), 0, 'display1')
-      showSequency(getSequencyOfNumbers(1,2,100), 50, 'display2')
-      getFactorial()
+      showSequency(getSequencyOfNumbers(0,2,top), 0, 'display1')
+      showSequency(getSequencyOfNumbers(1,2,top), 50, 'display2')
+      showFactorial(top)
     }
-    
-    document.getElementById("btn").addEventListener('click', clicked)
+
+    document.getElementById("btn").addEventListener('click', () => clicked(100))
   </script>
 </body>
 </html>
