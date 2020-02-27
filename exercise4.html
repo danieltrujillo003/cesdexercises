@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ejercicio 4</title>
+  <style>
+    .resultado {
+      font-size: 24px;
+      margin: 0 15px
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">← volver</a>
+  <h2>Se requiere un algoritmo para determinar, de N cantidades, cuántas son menores o iguales a cero y cuántas mayores a cero.</h2>
+  <input type="number" name="number" id="number">
+  <button id="btn">Agregar</button>
+  <span id="display"></span>
+  <br />
+  <br />
+  <button id="btn2">Calcular</button>
+  <br />
+  <br />
+  <span>Mayores que 0:</span><span id="display2" class="resultado"></span>
+  <span>Menores que 0:</span><span id="display3" class="resultado"></span>
+  
+  <script>
+    let sumOfLesser = 0
+    let sumOfGreater = 0
+    let list = []
+    
+    const getSumOfGreatersAndLessers = (array, number) => {
+      array.forEach(elem => {
+        if (elem <= number) {
+          sumOfLesser += 1
+        } else sumOfGreater += 1
+      })
+    }
+
+    const addNumberToList = () => {
+      if (!list.length) {
+        document.getElementById('display').innerHTML = null
+        document.getElementById('display2').innerHTML = null
+        document.getElementById('display3').innerHTML = null
+      }
+      const listElem = +document.getElementById(`number`).value;
+      list.push(listElem)
+      document.getElementById('display').innerHTML = list.join(', ')
+      document.getElementById('number').value = null
+    }
+
+    const clear = () => {
+      list = []
+      sumOfLesser = 0
+      sumOfGreater = 0
+    }
+
+    const clicked = () => {
+      getSumOfGreatersAndLessers(list, 0)
+      document.getElementById(`display2`).innerHTML = sumOfGreater;
+      document.getElementById(`display3`).innerHTML = sumOfLesser;
+      clear()
+    }
+    
+    document.getElementById("btn").addEventListener('click', addNumberToList)
+    document.getElementById("btn2").addEventListener('click', clicked)
+  </script>
+</body>
+</html>

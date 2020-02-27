@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ejercicio 2</title>
+  <style>
+    .resultado {
+      font-size: 24px;
+      margin: 0 15px
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">← volver</a>
+  <h2>Se requiere un algoritmo para obtener la suma de diez cantidades mediante la utilización de un ciclo <code>for</code>.</h2>
+  <label> 
+    <input type="number" name="number" id="begin">
+    inicio
+  </label>
+  <br />
+  <label>
+    <input type="number" name="number" id="end">
+    final
+  </label>
+  <br />
+  <button id="btn">Calcular</button>
+  <span id="display" class="resultado"></span>
+  <span id="display2"></span>
+  
+  <script>
+    let sum = 0
+    let list = ''
+    
+    const getSumOf10RandomNumbers = (begin, end) => {
+      for (let i = 0; i < 10; i++) {
+        const number = Math.floor(Math.random() * (end - begin + 1)) + begin
+        listElem = i === 9 ? `${number}` : `${number}, `
+        list += listElem
+        sum += +number
+      }
+      return sum
+    }
+
+    const clear = () => {
+      document.getElementById('display2').innerHTML = null
+      sum = 0
+      counter = 0 
+      list = ''
+    }
+
+    const clicked = () => {
+      clear()
+      const beginValue = +document.getElementById(`begin`).value;
+      const endValue = +document.getElementById(`end`).value;
+      const output = getSumOf10RandomNumbers(beginValue, endValue)
+      document.getElementById(`display`).innerHTML = sum;
+      document.getElementById(`display2`).innerHTML = list;
+    }
+    
+    document.getElementById("btn").addEventListener('click', clicked)
+  </script>
+</body>
+</html>

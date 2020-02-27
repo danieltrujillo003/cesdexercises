@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ejercicio 6</title>
+  <style>
+    .resultado {
+      font-size: 24px;
+      margin: 0 15px
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">← volver</a>
+  <h2>Realice un algoritmo para generar N elementos de la sucesión de Fibonacci.</h2>
+  <button id="btn">Agregar</button>
+  <button id="btn2">Limpiar</button>
+  <br /><br />
+  <span id="display" class="resultado">1</span>
+
+  
+  <script>
+    let actualNumber = 1
+    let prevNumber = 1
+
+    const nextFibonacciNumber = (actual, prev) => {
+      let midNumber = prev
+      prevNumber = actual
+      actualNumber = prevNumber + midNumber
+    }
+
+    const clear = () => {
+      actualNumber = 1
+      prevNumber = 1
+      document.getElementById(`display`).innerHTML = 1
+    }
+
+    const clicked = () => {
+      document.getElementById(`display`).innerHTML += `, ${actualNumber}`
+      nextFibonacciNumber(actualNumber, prevNumber)
+    }
+    
+    document.getElementById("btn").addEventListener('click', clicked)
+    document.getElementById("btn2").addEventListener('click', clear)
+  </script>
+</body>
+</html>

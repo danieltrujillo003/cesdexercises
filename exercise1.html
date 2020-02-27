@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ejercicio 1</title>
+  <style>
+    .resultado {
+      font-size: 24px;
+      margin: 0 15px
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">← volver</a>
+  <h2>Se requiere un algoritmo para obtener la edad promedio de un grupo de N alumnos. Si algún alumno tiene más de 18 años, se muestra el promedio que se lleva sin contar el alumno de 18 años. El usuario decide si desea cerrar el programa o vuelve a ejecutarlo.</h2>
+  <button id="btn">Promedio</button>
+  <button id="btn2">Finalizar</button>
+  <input type="number" name="number" id="data">
+  <span id="display" class="resultado"></span>
+  <span id="display2" ></span>
+  
+  <script>
+    let sum = 0
+    let counter = 0 
+    let list = ''
+    
+    const addUnles18 = (inputValue) => {
+      list += `${inputValue}, `
+      if (inputValue != '18') {
+        counter += 1
+        return sum += inputValue
+      } else {
+        return sum
+      } 
+    }
+
+    const clear = () => {
+      document.getElementById('display2').innerHTML = null
+      sum = 0
+      counter = 0 
+      list = ''
+    }
+
+    const clicked = () => {
+      const inputValue = +document.getElementById(`data`).value;
+      const output = addUnles18(inputValue)
+      document.getElementById(`display`).innerHTML = counter && (output/counter).toFixed(2);
+      document.getElementById(`display2`).innerHTML = list;
+      document.getElementById(`data`).value = null      
+    }
+    
+    document.getElementById("btn2").addEventListener('click', clear)  
+    document.getElementById("btn").addEventListener('click', clicked)
+  </script>
+</body>
+</html>

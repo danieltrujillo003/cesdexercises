@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ejercicio 3</title>
+  <style>
+    .resultado {
+      font-size: 24px;
+      margin: 0 15px
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">← volver</a>
+  <h2>Se requiere un algoritmo para obtener la estatura promedio de un grupo de personas cuyo número de miembros se desconoce. El ciclo debe efectuarse siempre y cuando se tenga una estatura registrada.</h2>
+
+  <pre>en mantenimiento</pre>
+
+  <label> 
+    Ingrese nombre y estatura separado por coma
+    <input type="text" name="number" id="data">
+    <button id="btn">Calcular promedio</button>
+  </label>
+  <span id="display" class="resultado"></span>
+  <br />
+  <br />
+  <div id="list"></div>
+  <br />
+  <button id="btn2">Limpiar</button>
+  
+  <script>
+    let sum = 0
+    let counter = 0 
+    let list = ''
+    
+    const getHeight = (inputValue) => {
+      list += `${inputValue}<br />`
+      const age = +inputValue.substring(inputValue.indexOf(',') + 1)
+      if (!isNaN(age)) {
+        counter += 1
+        return sum += age
+      } else {
+        return sum
+      } 
+    }
+
+    const clear = () => {
+      document.getElementById('display').innerHTML = null
+      document.getElementById('list').innerHTML = null
+      sum = 0
+      counter = 0 
+      list = ''
+    }
+
+    const clicked = () => {
+      const inputValue = document.getElementById(`data`).value;
+      const output = getHeight(inputValue)
+      document.getElementById(`display`).innerHTML = counter && (output/counter).toFixed(2);
+      document.getElementById(`list`).innerHTML = list;
+      document.getElementById(`data`).value = null      
+    }
+    
+    document.getElementById("btn2").addEventListener('click', clear)  
+    document.getElementById("btn").addEventListener('click', clicked)
+  </script>
+</body>
+</html>
