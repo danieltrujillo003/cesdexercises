@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ejercicio 8</title>
+  <style>
+    .resultado {
+      font-size: 24px;
+      margin: 0 15px
+    }
+    input[type="number"] {
+      width: 50px
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">← volver</a>
+  <h2>Elaborar un algoritmo que permita ingresar el número de partidos ganados, perdidos y empatados por algún equipo en el torneo de apertura. Se debe mostrar su puntaje total, teniendo en cuenta que por cada partido ganado obtendrá 3 puntos, empatado 1 punto y perdido 0 puntos.</h2>
+    
+  <input type="number" name="number" id="data1">
+  <span>-</span>
+  <input type="number" name="number" id="data2">
+  <button id="home">HOME</button>
+  <button id="away">AWAY</button>
+  <br /><br />
+  <p>Partidos ganados: <span id="ganados">0</span></p>
+  <p>Partidos perdidos: <span id="perdidos">0</span></p>
+  <p>Partidos empatados: <span id="empatados">0</span></p>
+  <br /><br />
+  <p>Puntaje total: <span id="total" class="resultado"></span></p>
+  
+  <script>
+
+    const calculateMatchStatus = (a, b) => {
+      if (a - b > 0) {
+        document.getElementById(`ganados`).innerHTML++
+      } else if (a - b < 0) {
+        document.getElementById(`perdidos`).innerHTML++
+      } else {
+        document.getElementById(`empatados`).innerHTML++
+      }
+    }
+      
+    const calculateResult = () => {
+      const ganados = document.getElementById(`ganados`).innerHTML * 3
+      const perdidos = document.getElementById(`perdidos`).innerHTML * 0
+      const empatados = document.getElementById(`empatados`).innerHTML * 1
+      return ganados + perdidos + empatados
+    }
+
+    const clear = () => {
+			document.getElementById(`data1`).value = null
+			document.getElementById(`data2`).value = null
+    }
+
+    const clicked = (side) => {
+      let a, b
+      if (side === 'home') {
+        a = document.getElementById(`data1`).value
+        b = document.getElementById(`data2`).value
+      } else {
+        a = document.getElementById(`data2`).value
+        b = document.getElementById(`data1`).value
+      }
+      if (a && b) {
+        calculateMatchStatus(a, b)
+        document.getElementById(`total`).innerHTML = calculateResult()
+        clear()
+      }
+    }
+    
+    document.getElementById("home").addEventListener('click', () => clicked('home'))
+    document.getElementById("away").addEventListener('click', () => clicked('away'))
+  </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ejercicio largo</title>
+  <style>
+    .resultado {
+      font-size: 24px;
+      margin: 0 15px
+    }
+
+		.data {
+			text-align: center;
+		}
+
+    table, th, td {
+      border: 1px solid black;
+		}
+
+		td, th {
+			padding: 1px 2px
+		}
+
+		button {
+			height: 47px;
+		}
+
+		input {
+			width: 68px
+		}
+
+  </style>
+</head>
+<body>
+  <a href="index.html">← volver</a>
+  <p>Una persona desea realizar un muestreo con N personas para determinar el promedio de los niños, jóvenes, adultos y viejos que existen en su zona habitacional y cuántos son de cada uno de las categorías. se determinan las categorías con base en la siguiente información:</p>
+  <ul>
+      <li>Niños: 0 a 13 años</li>
+      <li>Jóvenes: 14 a 30 años</li>
+      <li>Adultos: 31 a 60 años</li>
+      <li>Viejos: 60 en adelante</li>
+  </ul>
+  <p>Adicionalmente, se desea calcular el IMC de cada persona (<code>IMC = peso
+        [&#13199;]/ estatura [&#13217;]</code>), clasificados de la siguiente manera:</p>
+  <ul>
+      <li>Peso bajo: menos de 18.5</li>
+      <li>Peso normal: 18.5 a 24.9</li>
+      <li>Peso alto: 25 a 29.9</li>
+      <li>Obesidad: 30 en adelante</li>
+	</ul>
+	<table>
+		<tbody>
+			<tr>
+				<th>EDAD</th>
+				<th>PESO</th>
+				<th>ALTURA</th>
+				<th rowspan="2" id="button-th"><button id="agregar">AGREGAR</button></th>
+			</tr>
+			<tr>
+				<td>
+					<input type="number" name="edad" id="edad">
+				</td>
+				<td>
+					<input type="number" name="peso" id="peso">
+				</td>
+				<td>
+					<input type="number" name="altura" id="altura">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br /><br />
+  <table>
+      <thead>
+          <tr>
+              <th colspan="3">RESULTADOS</th>
+          </tr>
+          <tr>
+              <th>Enunciado</th>
+              <th>Porcentaje</th>
+              <th>Cantidad</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Encuestados</td>
+              <td class="data" id="p-encuestados"></td>
+              <td class="data" id="encuestados"></td>
+          </tr>
+          <tr>
+              <td>Niños</td>
+              <td class="data" id="p-niños"></td>
+              <td class="data" id="niños"></td>
+          </tr>
+          <tr>
+              <td>Jóvenes</td>
+              <td class="data" id="p-jovenes"></td>
+              <td class="data" id="jovenes"></td>
+          </tr>
+          <tr>
+              <td>Adultos</td>
+              <td class="data" id="p-adultos"></td>
+              <td class="data" id="adultos"></td>
+          </tr>
+          <tr>
+              <td>Viejos</td>
+              <td class="data" id="p-viejos"></td>
+              <td class="data" id="viejos"></td>
+          </tr>
+          <tr>
+              <td>Personas con peso bajo</td>
+              <td class="data" id="p-peso-bajo"></td>
+              <td class="data" id="peso-bajo"></td>
+          </tr>
+          <tr>
+              <td>Personas con peso normal</td>
+              <td class="data" id="p-peso-normal"></td>
+              <td class="data" id="peso-normal"></td>
+          </tr>
+          <tr>
+              <td>Personas con peso alto</td>
+              <td class="data" id="p-peso-alto"></td>
+              <td class="data" id="peso-alto"></td>
+          </tr>
+          <tr>
+              <td>Personas con obesidad</td>
+              <td class="data" id="p-obesidad"></td>
+              <td class="data" id="obesidad"></td>
+          </tr>
+          <tr>
+              <td>Promedio de IMC</td>
+              <td class="data">-</td>
+              <td class="data" id="promedio-imc"></td>
+          </tr>
+      </tbody>
+  </table>
+
+  <!--Calcular cantidad de intentos errados al ingresar edades y pesos negativos-->
+  
+  <script>
+		let totalPolled = 0, totalChild = 0, totalYoung = 0, totalAdult = 0, totalElder = 0, totalBelowNormal = 0, totalNormal = 0, totalAboveNormal = 0, totalObese = 0, totalIMC = 0, averIMC = 0
+
+		const computeAgeRange = (age) => {
+			const ranges = {
+				'0': () => totalChild++,
+				'13': () => totalYoung++,
+				'30': () => totalAdult++,
+				'60': () => totalElder++,
+			}
+			const range = Object.keys(ranges).reverse().find(key => age - key > 0)
+			ranges[range]()
+		}
+
+		const computeIMC = (weight, height) => {
+			const imc = weight/(height*height)
+			totalIMC += imc
+			const ranges = {
+				'0': () => totalBelowNormal++,
+				'18.5': () => totalNormal++,
+				'25': () => totalAboveNormal++,
+				'30': () => totalObese++,
+			}
+			const range = Object.keys(ranges).reverse().find(key => imc - key > 0)
+			ranges[range]()
+		}
+
+    const clear = () => {
+      document.getElementById('edad').value = null
+      document.getElementById('peso').value = null
+      document.getElementById('altura').value = null
+    }
+
+    const clicked = () => {
+			let age = document.getElementById('edad').value
+			let weight = document.getElementById('peso').value
+			let height = document.getElementById('altura').value
+			if (age && weight && height) {
+			totalPolled++
+			computeAgeRange(age)
+			document.getElementById('encuestados').innerHTML = totalPolled
+			document.getElementById('p-encuestados').innerHTML = `${(totalPolled/totalPolled * 100)}%`
+			document.getElementById('niños').innerHTML = totalChild
+			document.getElementById('p-niños').innerHTML = `${(totalChild/totalPolled * 100).toFixed(2)}%`
+			document.getElementById('jovenes').innerHTML = totalYoung
+			document.getElementById('p-jovenes').innerHTML = `${(totalYoung/totalPolled * 100).toFixed(2)}%`
+			document.getElementById('adultos').innerHTML = totalAdult
+			document.getElementById('p-adultos').innerHTML = `${(totalAdult/totalPolled * 100).toFixed(2)}%`
+			document.getElementById('viejos').innerHTML = totalElder
+			document.getElementById('p-viejos').innerHTML = `${(totalElder/totalPolled * 100).toFixed(2)}%`
+
+			computeIMC(weight, height)
+			document.getElementById('peso-bajo').innerHTML = totalBelowNormal
+			document.getElementById('p-peso-bajo').innerHTML = `${(totalBelowNormal/totalPolled * 100).toFixed(2)}%`
+			document.getElementById('peso-normal').innerHTML = totalNormal
+			document.getElementById('p-peso-normal').innerHTML = `${(totalNormal/totalPolled * 100).toFixed(2)}%`
+			document.getElementById('peso-alto').innerHTML = totalAboveNormal
+			document.getElementById('p-peso-alto').innerHTML = `${(totalAboveNormal/totalPolled * 100).toFixed(2)}%`
+			document.getElementById('obesidad').innerHTML = totalObese
+			document.getElementById('p-obesidad').innerHTML = `${(totalObese/totalPolled * 100).toFixed(2)}%`
+			document.getElementById('promedio-imc').innerHTML = (totalIMC/totalPolled).toFixed(2)
+			clear()
+			}
+    }
+    
+    document.getElementById("agregar").addEventListener('click', clicked)
+  </script>
+</body>
+</html>

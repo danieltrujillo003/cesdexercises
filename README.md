@@ -1,3 +1,3 @@
 # cesdexercises
 
-Open `index.html` :)
+Just open `index.html`
