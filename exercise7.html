@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ejercicio 7</title>
+  <style>
+    .resultado {
+      font-size: 24px;
+      margin: 0 15px
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">← volver</a>
+  <h2>Elaborar un algoritmo que solicite el número de respuestas correctas, incorrectas y en blanco, correspondientes a postulantes, y muestre su puntaje final considerando que por cada respuesta tendrá 4 puntos, por respuesta incorrecta tendrá -1 y por respuestas en blanco tendrá 0.</h2>
+  <label> 
+    <input type="number" name="number" id="data1">
+    Correctas
+  </label><br /><br />
+  <label> 
+    <input type="number" name="number" id="data2">
+    Incorrectas
+  </label><br /><br />
+  <label> 
+    <input type="number" name="number" id="data3">
+    En blanco
+  </label><br /><br />
+  <button id="btn">Calcular</button>
+  <button id="btn2">Limpiar</button>
+  <br /><br />
+  <span id="display" class="resultado"></span>
+  
+  <script>
+
+    const calculateResult = () => {
+      const right = document.getElementById(`data1`).value * 4
+      const wrong = document.getElementById(`data2`).value * -1
+      const blank = document.getElementById(`data3`).value * 0
+      return right + wrong + blank
+    }
+
+    const clear = () => {
+			document.getElementById(`data1`).value = null
+			document.getElementById(`data2`).value = null
+			document.getElementById(`data3`).value = null
+			document.getElementById(`display`).innerHTML = null
+    }
+
+    const clicked = () => {
+      document.getElementById(`display`).innerHTML = calculateResult()
+    }
+    
+    document.getElementById("btn").addEventListener('click', clicked)
+    document.getElementById("btn2").addEventListener('click', clear)
+  </script>
+</body>
+</html>
