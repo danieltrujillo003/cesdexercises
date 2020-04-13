@@ -11,7 +11,7 @@ def triangle_area():
 def currency_converter(start='USD', end='COP'):
   amount = int(input('Enter currency value: '))
   conversion = f'{start}_{end}'
-  params = {'apiKey': constants.currency_api_key, 'compact': "ultra", 'q': conversion}
+  params = {'apiKey': constants.CURRENCY_API_KEY, 'compact': "ultra", 'q': conversion}
   res = requests.get(constants.URL, params=params)
   data = res.json()
   result = amount * data[conversion]
@@ -34,13 +34,13 @@ def temperature_converter(begin='celsius',end='fahrenheit'):
     return f'Cannot convert {begin} to {end}.'
 
 def convert_to_seconds(unit='lustrum'):
-  if unit in constants.time_values:
-    return constants.time_values[unit]
+  if unit in constants.TIME_VALUES:
+    return constants.TIME_VALUES[unit]
   else:
     return f'{unit} unit is not supported.'
 
 def seconds_sun_to_planet(planet='mars'):
-  return constants.sun[planet] * 1000 / constants.lightspeed
+  return constants.SUN_DISTANCE_TO[planet] * 1000 / constants.LIGHTSPEED
 
 def num_of_wheel_turns(distance=1,wheel_diameter=50):
   return (distance * 1E5 / wheel_diameter * math.pi)
