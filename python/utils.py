@@ -13,3 +13,11 @@ def find_in_dict_by_value(original_dict, value_to_find, key_or_tuple='tuple'):
         return (key,value)
       else:
         return "Must select between 'key' or 'tuple'"
+
+def user_input(text_to_show, isInt=True):
+  values_list=[]
+  another='y'
+  while another=='y':
+    values_list.append(int(input(text_to_show)) if isInt else input(text_to_show))
+    another = input('Another value? (y/n) ')
+  return values_list

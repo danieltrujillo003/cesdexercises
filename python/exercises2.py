@@ -32,12 +32,8 @@ def num_list_properties(limit=10):
   return properties
 
 def palindrome_sentences():
-  sentences_list=[]
-  palindrome_list=[]
-  another='y'
-  while another=='y':
-    sentences_list.append(input('Enter a sentence: '))
-    another = input('Another sentence? (y/n) ')
+  sentences_list = utils.user_input('Enter a sentence: ', False)
+  palindrome_list = []
   for sentence in sentences_list:
     if sentence==sentence[::-1]:
       palindrome_list.append(sentence)
@@ -81,13 +77,13 @@ def delete_all_vowels():
   sentence_char_list = list(sentence)
   return ''.join(utils.delete_from_list(sentence_char_list, constants.ENGLISH_VOWELS))
 
-def only_pairs(begin=1, end=100):
+def only_odds(begin=1, end=100):
   if begin % 2 != 0: begin = begin + 1
   if end % 2 == 0: end = end + 1
-  pairs_list = []
+  odds_list = []
   for num in range(begin,end,2):
-    pairs_list.append(num)
-  return pairs_list
+    odds_list.append(num)
+  return odds_list
 
 print('Average of subjects:',subjets_aver())
 # print('Best subject:',best_subject())
@@ -98,4 +94,4 @@ print('Average of subjects:',subjets_aver())
 # print('Number of vowles in a given sentence:',number_of_vowels())
 # print('Count of each vowel in a given sentence:',count_of_each_vowel())
 # print('Deletion of all vowels from a given sentence:',delete_all_vowels())
-# print('List of all pairs from 0 to 100:',only_pairs())
+# print('List of all odds from 0 to 100:',only_odds())
