@@ -79,7 +79,7 @@ def subjets_aver(): # Isn't there an aver() function?
 print('Triangle area:',triangle_area())
 # print('Dollars to colombian peso:',currency_converter())
 # print('Celsius to Fahrenheit:',temperature_converter())
-# print('Amount of seconds un a lustrum:',convert_to_seconds())
+# print('Amount of seconds in a lustrum:',convert_to_seconds())
 # print('Seconds for light from Sun to Mars:',seconds_sun_to_planet())
 # print('Turns of a 50cm diameter wheel in 1km:',num_of_wheel_turns())
 # print('Lenght of a 20m building shadow with a 22° sunray:',compute_shadow_length())

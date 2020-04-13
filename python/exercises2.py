@@ -54,10 +54,48 @@ def most_repeated_word(text=constants.FIRST_CHAPTER_OF_FRANKENSTEN):
   max_value = max(words_count.values())
   return utils.find_in_dict_by_value(words_count,max_value)
 
+def show_string_as_corelated_numbers():
+  sentence = input('Enter a sentence: ')
+  chars_as_numbers = []
+  for c in sentence:
+    for key, value in constants.ENGLISH_ALPHABET:
+      if c.lower() == key: chars_as_numbers.append(f'{value}')
+  return ''.join(chars_as_numbers)
 
+def count_of_each_vowel():
+  sentence = input('Enter a sentence: ')
+  vowles = dict(
+    a=sentence.count('a'),
+    e=sentence.count('e'),
+    i=sentence.count('i'),
+    o=sentence.count('o'),
+    u=sentence.count('u')
+  )
+  return vowles
 
-# print('Average of subjects:',subjets_aver())
+def number_of_vowels():
+  return sum(count_of_each_vowel().values())
+
+def delete_all_vowels():
+  sentence = input('Enter a sentence: ')
+  sentence_char_list = list(sentence)
+  return ''.join(utils.delete_from_list(sentence_char_list, constants.ENGLISH_VOWELS))
+
+def only_pairs(begin=1, end=100):
+  if begin % 2 != 0: begin = begin + 1
+  if end % 2 == 0: end = end + 1
+  pairs_list = []
+  for num in range(begin,end,2):
+    pairs_list.append(num)
+  return pairs_list
+
+print('Average of subjects:',subjets_aver())
 # print('Best subject:',best_subject())
-# print('Properties of a given 10 number list:',num_list_properties())
+# print('Properties of a given 10 numbers list:',num_list_properties())
 # print('All palindrome sentences of a given sentences list:',palindrome_sentences())
 # print('Most repeated word on first chapter of Frankenstein:',most_repeated_word())
+# print('Character-numbered version of a given sentence:',show_string_as_corelated_numbers())
+# print('Number of vowles in a given sentence:',number_of_vowels())
+# print('Count of each vowel in a given sentence:',count_of_each_vowel())
+# print('Deletion of all vowels from a given sentence:',delete_all_vowels())
+# print('List of all pairs from 0 to 100:',only_pairs())
