@@ -46,7 +46,7 @@ def num_of_wheel_turns(distance=1,wheel_diameter=50):
   return (distance * 1E5 / wheel_diameter * math.pi)
 
 def compute_shadow_length(object_height=20, sunray_angle=22):
-  return (object_height / math.sin(math.radians(sunray_angle)))
+  return (object_height / math.tan(math.radians(sunray_angle)))
 
 def compare_two_ages():
   age1 = input('age 1: ')
